@@ -1,5 +1,5 @@
 import React from 'react';
-import NumberHolder from '../number-holder';
+import Cell from '../cell';
 import styled from 'styled-components';
 
 const InnerGridContainer = styled.div`
@@ -12,8 +12,8 @@ const InnerGridContainer = styled.div`
 const InnerGrid = () => {
     return (
         <InnerGridContainer>
-            {Array.from({ length: 9 }).map(() => (
-                <NumberHolder />
+            {Array.from({ length: 9 }).map((_, index) => (
+                <Cell key={index} />
             ))}
         </InnerGridContainer>
     );

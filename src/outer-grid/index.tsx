@@ -12,8 +12,8 @@ const OuterGridContainer = styled.div`
 const OuterGrid = () => {
     return (
         <OuterGridContainer>
-            {Array.from({ length: 9 }).map(() => (
-                <InnerGrid />
+            {Array.from({ length: 9 }).map((_, index) => (
+                <InnerGrid key={index} />
             ))}
         </OuterGridContainer>
     );
