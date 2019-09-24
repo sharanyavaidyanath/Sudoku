@@ -3,21 +3,18 @@ import NumberHolder from '../number-holder';
 import styled from 'styled-components';
 
 const InnerGridContainer = styled.div`
-    display: grid;
+    display: inline-grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    border: 1px solid black;
 `;
 
 const InnerGrid = () => {
     return (
         <InnerGridContainer>
-            <NumberHolder />
-            <NumberHolder />
-            <NumberHolder />
-            <NumberHolder />
-            <NumberHolder />
-            <NumberHolder />
-            <NumberHolder />
-            <NumberHolder />
-            <NumberHolder />
+            {Array.from({ length: 9 }).map(() => (
+                <NumberHolder />
+            ))}
         </InnerGridContainer>
     );
 };

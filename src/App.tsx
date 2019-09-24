@@ -1,10 +1,8 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import NumberHolder from './number-holder';
+import InnerGrid from './inner-grid';
 
 const App: React.FC = () => {
-    return <NumberHolder />;
+    return <InnerGrid />;
 };
 
 export default App;
