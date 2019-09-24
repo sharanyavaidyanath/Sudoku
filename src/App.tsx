@@ -1,8 +1,8 @@
 import React from 'react';
-import InnerGrid from './inner-grid';
+import OuterGrid from './outer-grid';
 
 const App: React.FC = () => {
-    return <InnerGrid />;
+    return <OuterGrid />;
 };
 
 export default App;

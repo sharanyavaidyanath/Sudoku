@@ -1,0 +1,22 @@
+import React from 'react';
+import styled from 'styled-components';
+import InnerGrid from '../inner-grid';
+
+const OuterGridContainer = styled.div`
+    display: inline-grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+    border: 1px solid black;
+`;
+
+const OuterGrid = () => {
+    return (
+        <OuterGridContainer>
+            {Array.from({ length: 9 }).map(() => (
+                <InnerGrid />
+            ))}
+        </OuterGridContainer>
+    );
+};
+
+export default OuterGrid;
