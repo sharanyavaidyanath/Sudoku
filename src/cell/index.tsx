@@ -29,12 +29,24 @@ interface CellProps {
 }
 
 const Cell = ({ sudoku, rowNumber, columnNumber }: CellProps) => {
-  const solver = new Sudoku(sudoku);
-
+  const solver = React.useRef(new Sudoku(sudoku));
+  const initialRender = React.useRef(true);
   const [valid, setValid] = React.useState(true);
   const [value, setValue] = React.useState(
     (sudoku[rowNumber][columnNumber] || "").toString(),
   );
+
+  React.useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+    } else {
+      setValid(
+        value
+          ? solver.current.isValid(Number(value), rowNumber, columnNumber)
+          : true,
+      );
+    }
+  }, [value, columnNumber, rowNumber]);
 
   const isPreset = Boolean(sudoku[rowNumber][columnNumber]);
   const onCellInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,11 +55,6 @@ const Cell = ({ sudoku, rowNumber, columnNumber }: CellProps) => {
     if (result || inputValue === "") {
       const lastCharacter = inputValue ? inputValue[inputValue.length - 1] : "";
       setValue(lastCharacter);
-      setValid(
-        lastCharacter
-          ? solver.isValid(Number(lastCharacter), rowNumber, columnNumber)
-          : true,
-      );
     }
   };
 

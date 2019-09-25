@@ -5,6 +5,7 @@ const ALL_NUMBERS = Array.from({ length: 9 }, (_, index) => index + 1); /*?*/
 export class Sudoku {
   value: SudokuType;
   constructor(grid: SudokuType) {
+    console.log("Sudoku generated");
     if (Array.isArray(grid) && grid.length === 9) {
       if (grid.filter(row => row.length !== 9).length === 0) {
         this.value = grid;
@@ -24,10 +25,10 @@ export class Sudoku {
 
   getGridBoundary(gridNumber: number) {
     return {
-      top: (gridNumber % 3) * 3,
-      left: 3 * Math.floor(gridNumber / 3),
-      bottom: (gridNumber % 3) * 3 + 2,
-      right: Math.ceil((gridNumber + 1) / 3) * 3 - 1,
+      left: (gridNumber % 3) * 3,
+      right: (gridNumber % 3) * 3 + 2,
+      top: 3 * Math.floor(gridNumber / 3),
+      bottom: Math.ceil((gridNumber + 1) / 3) * 3 - 1,
     };
   }
 
@@ -43,10 +44,10 @@ export class Sudoku {
     bottom: number;
   }) {
     return this.value
-      .filter((_, rowNumber) => rowNumber >= left && rowNumber <= right)
+      .filter((_, rowNumber) => rowNumber >= top && rowNumber <= bottom)
       .map(row =>
         row.filter(
-          (_, columnNumber) => columnNumber >= top && columnNumber <= bottom,
+          (_, columnNumber) => columnNumber >= left && columnNumber <= right,
         ),
       );
   }
@@ -55,10 +56,10 @@ export class Sudoku {
     for (let gridNumber = 0; gridNumber < 9; gridNumber++) {
       const { left, right, top, bottom } = this.getGridBoundary(gridNumber);
       if (
-        rowNumber >= left &&
-        rowNumber <= right &&
-        columnNumber >= top &&
-        columnNumber <= bottom
+        rowNumber >= top &&
+        rowNumber <= bottom &&
+        columnNumber >= left &&
+        columnNumber <= right
       ) {
         return this.getGridNumbers({ left, right, top, bottom }).flat();
       }
