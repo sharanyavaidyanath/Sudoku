@@ -1,6 +1,7 @@
 import React from "react";
 import OuterGrid from "./outer-grid";
 import styled from "styled-components";
+import { SUDOKU } from "./utils/constants";
 
 const Container = styled.div`
   margin: 200px;
@@ -9,7 +10,7 @@ const Container = styled.div`
 const App: React.FC = () => {
   return (
     <Container>
-      <OuterGrid />
+      <OuterGrid sudoku={SUDOKU} />
     </Container>
   );
 };
