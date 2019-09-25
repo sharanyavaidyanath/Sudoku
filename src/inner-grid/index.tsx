@@ -1,10 +1,10 @@
 import React from "react";
 import Cell from "../cell";
 import styled from "styled-components";
-import { SudokuType } from "../utils/constants";
+import { Sudoku } from "../utils/helpers";
 
 interface InnerGridProps {
-  sudoku: SudokuType;
+  sudoku: Sudoku;
   gridNumber: number;
 }
 

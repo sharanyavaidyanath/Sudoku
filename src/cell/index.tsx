@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { SudokuType } from "../utils/constants";
 import { Sudoku } from "../utils/helpers";
 
 interface InputProps {
@@ -23,17 +22,16 @@ const Input = styled.input<InputProps>`
 `;
 
 interface CellProps {
-  sudoku: SudokuType;
+  sudoku: Sudoku;
   rowNumber: number;
   columnNumber: number;
 }
 
 const Cell = ({ sudoku, rowNumber, columnNumber }: CellProps) => {
-  const solver = React.useRef(new Sudoku(sudoku));
   const initialRender = React.useRef(true);
   const [valid, setValid] = React.useState(true);
   const [value, setValue] = React.useState(
-    (sudoku[rowNumber][columnNumber] || "").toString(),
+    (sudoku.value[rowNumber][columnNumber] || "").toString(),
   );
 
   React.useEffect(() => {
@@ -41,14 +39,12 @@ const Cell = ({ sudoku, rowNumber, columnNumber }: CellProps) => {
       initialRender.current = false;
     } else {
       setValid(
-        value
-          ? solver.current.isValid(Number(value), rowNumber, columnNumber)
-          : true,
+        value ? sudoku.isValid(Number(value), rowNumber, columnNumber) : true,
       );
     }
-  }, [value, columnNumber, rowNumber]);
+  }, [value, columnNumber, rowNumber, sudoku]);
 
-  const isPreset = Boolean(sudoku[rowNumber][columnNumber]);
+  const isPreset = Boolean(sudoku.value[rowNumber][columnNumber]);
   const onCellInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
     const result = inputValue.match(/^[1-9]+$/g);

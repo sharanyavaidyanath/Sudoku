@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import InnerGrid from "../inner-grid";
-import { SudokuType } from "../utils/constants";
+import { Sudoku } from "../utils/helpers";
 
 interface OuterGridProps {
-  sudoku: SudokuType;
+  sudoku: Sudoku;
 }
 
 const OuterGridContainer = styled.div`

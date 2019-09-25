@@ -5,7 +5,6 @@ const ALL_NUMBERS = Array.from({ length: 9 }, (_, index) => index + 1); /*?*/
 export class Sudoku {
   value: SudokuType;
   constructor(grid: SudokuType) {
-    console.log("Sudoku generated");
     if (Array.isArray(grid) && grid.length === 9) {
       if (grid.filter(row => row.length !== 9).length === 0) {
         this.value = grid;
