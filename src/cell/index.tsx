@@ -11,7 +11,10 @@ const Input = styled.input`
     outline: none;
 `;
 
-const Cell = () => {
+interface CellProps {
+    preset?: number;
+}
+const Cell = ({ preset }: CellProps) => {
     const [value, setValue] = React.useState('');
     const onCellInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.target.value;
@@ -24,6 +27,13 @@ const Cell = () => {
         }
     };
 
-    return <Input type="text" onChange={onCellInput} value={value}></Input>;
+    return (
+        <Input
+            type="text"
+            onChange={onCellInput}
+            value={preset || value}
+            disabled={Boolean(preset)}
+        ></Input>
+    );
 };
 export default Cell;
