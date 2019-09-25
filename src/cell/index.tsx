@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { SudokuType } from "../utils/constants";
 
 const Input = styled.input`
   position: relative;
@@ -17,10 +18,16 @@ const Input = styled.input`
 `;
 
 interface CellProps {
-  preset?: number;
+  sudoku: SudokuType;
+  rowNumber: number;
+  columnNumber: number;
 }
-const Cell = ({ preset }: CellProps) => {
-  const [value, setValue] = React.useState("");
+
+const Cell = ({ sudoku, rowNumber, columnNumber }: CellProps) => {
+  const [value, setValue] = React.useState(
+    (sudoku[rowNumber][columnNumber] || "").toString(),
+  );
+  const isPreset = Boolean(sudoku[rowNumber][columnNumber]);
   const onCellInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
     const result = inputValue.match(/^[1-9]+$/g);
@@ -34,8 +41,8 @@ const Cell = ({ preset }: CellProps) => {
     <Input
       type="text"
       onChange={onCellInput}
-      value={preset || value}
-      disabled={Boolean(preset)}
+      value={value}
+      disabled={isPreset}
     ></Input>
   );
 };
