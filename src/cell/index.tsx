@@ -1,18 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import { SudokuType } from "../utils/constants";
+import { Sudoku } from "../utils/helpers";
 
-const Input = styled.input`
+interface InputProps {
+  invalid: boolean;
+}
+
+const Input = styled.input<InputProps>`
   position: relative;
   height: 50px;
   width: 50px;
   border: 1px solid brown;
-  background-color: bisque;
+  background-color: ${props => (props.invalid ? "red" : "bisque")};
   font-size: 20px;
   text-align: center;
   outline: none;
   &:focus {
-    background-color: burlywood;
+    background-color: ${props => (props.invalid ? "red" : "burlywood")};
     border: 1px solid burlywood;
   }
 `;
@@ -24,9 +29,13 @@ interface CellProps {
 }
 
 const Cell = ({ sudoku, rowNumber, columnNumber }: CellProps) => {
+  const solver = new Sudoku(sudoku);
+
+  const [valid, setValid] = React.useState(true);
   const [value, setValue] = React.useState(
     (sudoku[rowNumber][columnNumber] || "").toString(),
   );
+
   const isPreset = Boolean(sudoku[rowNumber][columnNumber]);
   const onCellInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -34,6 +43,11 @@ const Cell = ({ sudoku, rowNumber, columnNumber }: CellProps) => {
     if (result || inputValue === "") {
       const lastCharacter = inputValue ? inputValue[inputValue.length - 1] : "";
       setValue(lastCharacter);
+      setValid(
+        lastCharacter
+          ? solver.isValid(Number(lastCharacter), rowNumber, columnNumber)
+          : true,
+      );
     }
   };
 
@@ -43,6 +57,7 @@ const Cell = ({ sudoku, rowNumber, columnNumber }: CellProps) => {
       onChange={onCellInput}
       value={value}
       disabled={isPreset}
+      invalid={!valid}
     ></Input>
   );
 };
