@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Input = styled.input`
+    position: relative;
     height: 50px;
     width: 50px;
     border: 1px solid brown;
@@ -9,6 +10,10 @@ const Input = styled.input`
     font-size: 20px;
     text-align: center;
     outline: none;
+    &:focus {
+        background-color: burlywood;
+        border: 1px solid burlywood;
+    }
 `;
 
 interface CellProps {

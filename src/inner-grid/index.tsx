@@ -13,7 +13,7 @@ const InnerGrid = () => {
     return (
         <InnerGridContainer>
             {Array.from({ length: 9 }).map((_, index) => (
-                <Cell key={index} preset={8} />
+                <Cell key={index} />
             ))}
         </InnerGridContainer>
     );
