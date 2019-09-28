@@ -1,7 +1,17 @@
-import React, { createContext } from "react";
+import React, { createContext, useContext } from "react";
 
-export const ButtonValueContext = createContext(0);
-export const ButtonClickContext = createContext(() => {});
+const ButtonValueContext = createContext(0);
+const ButtonClickContext = createContext(() => {});
+
+export const useButtonValue = () => {
+  const value: number = useContext(ButtonValueContext);
+  return value;
+};
+
+export const useButtonClick = () => {
+  const value: () => void = useContext(ButtonClickContext);
+  return value;
+};
 
 interface ButtonProps {
   value: number;
