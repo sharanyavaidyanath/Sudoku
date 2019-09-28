@@ -4,10 +4,6 @@ import styled from "styled-components";
 interface ContainerProps {
   numberOfButtons: number;
 }
-interface ButtonContainerProps {
-  value: number;
-  onClick: () => void;
-}
 
 const Container = styled.div<ContainerProps>`
   display: grid;
@@ -18,15 +14,11 @@ const Container = styled.div<ContainerProps>`
   justify-content: start;
 `;
 
-const ButtonContainer = ({
-  numberOfButtons,
-  value,
-  onClick,
-}: ButtonContainerProps & ContainerProps) => {
+const ButtonContainer = ({ numberOfButtons }: ContainerProps) => {
   return (
     <Container numberOfButtons={numberOfButtons}>
       {Array.from({ length: numberOfButtons }).map((_, index) => (
-        <SampleButton key={index} value={value} onClick={onClick} />
+        <SampleButton key={index} />
       ))}
     </Container>
   );

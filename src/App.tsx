@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import ButtonContainer from "./button-container";
+import { ButtonContext } from "./utils/button-context";
 
 const Container = styled.div`
   margin: 200px;
@@ -11,8 +12,10 @@ const App: React.FC = () => {
   const onClick = () => setValue(value + 1);
   return (
     <Container>
-      <ButtonContainer numberOfButtons={8} onClick={onClick} value={value} />
-      <ButtonContainer numberOfButtons={5} onClick={onClick} value={value} />
+      <ButtonContext.Provider value={{ value, onClick }}>
+        <ButtonContainer numberOfButtons={8} />
+        <ButtonContainer numberOfButtons={5} />
+      </ButtonContext.Provider>
     </Container>
   );
 };
