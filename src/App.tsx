@@ -1,18 +1,18 @@
-import React from "react";
-import OuterGrid from "./outer-grid";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { SUDOKU } from "./utils/constants";
-import { Sudoku } from "./utils/helpers";
+import ButtonContainer from "./button-container";
 
 const Container = styled.div`
   margin: 200px;
 `;
 
 const App: React.FC = () => {
-  const sudoku = new Sudoku(SUDOKU);
+  const [value, setValue] = useState(0);
+  const onClick = () => setValue(value + 1);
   return (
     <Container>
-      <OuterGrid sudoku={sudoku} />
+      <ButtonContainer numberOfButtons={8} onClick={onClick} value={value} />
+      <ButtonContainer numberOfButtons={5} onClick={onClick} value={value} />
     </Container>
   );
 };
