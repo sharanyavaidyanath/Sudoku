@@ -1,6 +1,4 @@
 import { createContext } from "react";
 
-export const ButtonContext = createContext<{
-  value: number;
-  onClick: () => void;
-} | null>(null);
+export const ButtonValueContext = createContext(0);
+export const ButtonClickContext = createContext(() => {});
