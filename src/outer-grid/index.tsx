@@ -1,11 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import InnerGrid from "../inner-grid";
-import { Sudoku } from "../utils/helpers";
-
-interface OuterGridProps {
-  sudoku: Sudoku;
-}
 
 const OuterGridContainer = styled.div`
   display: inline-grid;
@@ -14,11 +9,11 @@ const OuterGridContainer = styled.div`
   border: 1px solid black;
 `;
 
-const OuterGrid = ({ sudoku }: OuterGridProps) => {
+const OuterGrid = () => {
   return (
     <OuterGridContainer>
       {Array.from({ length: 9 }).map((_, index) => (
-        <InnerGrid key={index} sudoku={sudoku} gridNumber={index} />
+        <InnerGrid key={index} gridNumber={index} />
       ))}
     </OuterGridContainer>
   );

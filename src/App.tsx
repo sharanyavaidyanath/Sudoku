@@ -1,19 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import OuterGrid from "./outer-grid";
-import { Sudoku } from "./utils/helpers";
-import { SUDOKU } from "./utils/constants";
+import { SudokuProvider } from "./utils/sudoku";
 
 const Container = styled.div`
   margin: 200px;
 `;
 
-const sudoku = new Sudoku(SUDOKU);
-
 const App: React.FC = () => {
   return (
     <Container>
-      <OuterGrid sudoku={sudoku}></OuterGrid>
+      <SudokuProvider>
+        <OuterGrid></OuterGrid>
+      </SudokuProvider>
     </Container>
   );
 };

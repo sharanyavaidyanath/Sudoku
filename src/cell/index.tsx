@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Sudoku } from "../utils/helpers";
+import { useSudoku } from "../utils/sudoku";
 
 interface InputProps {
   invalid: boolean;
@@ -22,12 +22,12 @@ const Input = styled.input<InputProps>`
 `;
 
 interface CellProps {
-  sudoku: Sudoku;
   rowNumber: number;
   columnNumber: number;
 }
 
-const Cell = ({ sudoku, rowNumber, columnNumber }: CellProps) => {
+const Cell = ({ rowNumber, columnNumber }: CellProps) => {
+  const sudoku = useSudoku();
   const initialRender = React.useRef(true);
   const [valid, setValid] = React.useState(true);
   const [value, setValue] = React.useState(
